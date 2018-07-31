@@ -1,0 +1,11 @@
+﻿Addig tool for entity framework
+
+1.    dotnet ef migrations add "Name of file "
+2.    dotnet ef database update 
+
+
+
+
+------------
+add-migration 
+ 
