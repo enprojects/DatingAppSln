@@ -13,7 +13,7 @@ namespace DatingApp.Common.Services
 
         private readonly IValuesRepos _repos;
       
-        //Ex1 get specific implemintation for IA
+        //Ex1 get specific implemintation for IA --
         private readonly Func<string, IServMultipaleConcreate> _serviceAccessorTest;
         private readonly IServMultipaleConcreateGeneric<ConcreateC> _serviceAccessorTest2;
 
