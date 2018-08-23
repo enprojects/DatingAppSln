@@ -14,7 +14,6 @@ namespace DatingApp.Common.Repositories
         public AuthRepository(DatingContext context) : base(context)
         {
 
-
         }
 
         public IEnumerable<User> GetUser(Func<User, bool> func)

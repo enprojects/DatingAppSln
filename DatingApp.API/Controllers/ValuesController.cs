@@ -7,11 +7,17 @@ using DatingApp.Common.Interfaces;
 using DatingApp.Common.Interfaces.IServices;
 using DatingApp.Common.Repositories;
 using DatingApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
  
 
 namespace udemyCoreWithAngular.Controllers
 {
+    
+
+
+
+    [Authorize]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
@@ -22,26 +28,18 @@ namespace udemyCoreWithAngular.Controllers
             _serv = serv;
         }
 
-
-        [HttpGet]
-        public IEnumerable<Value> Get()
-        {
-
+ 
+        [AllowAnonymous]
+        public IEnumerable<Value> FetchValues()
+        { 
             return _serv.GetAllValues();
         }
-        // GET api/values
-        //[HttpGet]
-        //public async Task<IEnumerable<Value>> Get()
-        //{
 
-        //    var result = await _repos.GetValues();
-        //    return result;
 
-        //}
-
-        // GET api/values/5
+      //  GET api/values/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(string id)
         {
             return "valuedddd";
         }

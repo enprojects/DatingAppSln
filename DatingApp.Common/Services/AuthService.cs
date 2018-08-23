@@ -18,45 +18,57 @@ namespace DatingApp.Common.Services
 
         private readonly IAuthRepository _repos;
 
-        public AuthService(IAuthRepository repos)
+        public AuthService(IAuthRepository repos, IServMultipaleConcreate _serv)
         {
             _repos = repos;
-
-
         }
 
-        public User Login(string userName, string password)
+        public bool Login(string userName, string password)
         {
-            throw new System.NotImplementedException();
+            var user = GetUser(userName);
+
+            if (user != null)
+            {
+                return Decrypt(password) == password;
+            }
+         
+            return false;
         }
 
-        public bool RegisterUser(User user, string password)
+        public bool RegisterUser(string userName, string password)
         {
             var recordsInserted = 0;
-            if (!string.IsNullOrWhiteSpace(user?.UserName))
-            {
-                user.Password = Encrypt(password);
 
-                recordsInserted = _repos.SaveUser(user);
-            }
+            recordsInserted = _repos.SaveUser(new User
+            {
+                UserName = userName.ToLower(),
+                Password = Encrypt(password)
+            });
 
             return recordsInserted > 1;
         }
 
 
-
-        public bool UserExist(string username)
+        public User CheckIfUserValid(string userName, string password)
         {
-            var user = _repos.GetUser(x => x.UserName == username).FirstOrDefault();
-            return user != null;
+            var user = GetUser(userName);
+            if (user != null)
+            {
+                if (Decrypt(user.Password) == password)
+                {
+                    return user;
+                }
+            }
+            return null;
         }
 
-
-        private void CreateHashKey(string password)
+        public User GetUser(string username)
         {
-            throw new NotImplementedException();
+            var user = _repos.GetUser(x => x.UserName.ToLower() == username.ToLower()).FirstOrDefault();
+            return user;
         }
 
+        #region private method
 
         public static string Encrypt(string plainText)
         {
@@ -82,7 +94,6 @@ namespace DatingApp.Common.Services
             return Convert.ToBase64String(cipherTextBytes);
         }
 
-
         public static string Decrypt(string encryptedText)
         {
             byte[] cipherTextBytes = Convert.FromBase64String(encryptedText);
@@ -99,6 +110,9 @@ namespace DatingApp.Common.Services
             cryptoStream.Close();
             return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount).TrimEnd("\0".ToCharArray());
         }
+
+        #endregion
+
 
     }
 }

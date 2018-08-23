@@ -8,8 +8,11 @@ namespace DatingApp.Common.Interfaces.IServices
 {
     public interface IAuthService
     {
-        bool RegisterUser(User user , string password);
-        User Login(string userName, string password);
-        bool UserExist(string username);
+        bool RegisterUser(string userName, string password);
+        bool Login(string userName, string password);
+        User GetUser(string username);
+        User CheckIfUserValid(string userName, string password);
+
+
     }
 }
