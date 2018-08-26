@@ -21,12 +21,12 @@ namespace DatingApp.Common.Services
         public ValueServices(IValuesRepos repos, Func<string, IServMultipaleConcreate> serviceAccessorTest, IServMultipaleConcreateGeneric<ConcreateC> serviceAccessorTest2)
         {
             _repos = repos;
-            _serviceAccessorTest = serviceAccessorTest;
-            _serviceAccessorTest2 = serviceAccessorTest2;
+            //_serviceAccessorTest = serviceAccessorTest;
+            //_serviceAccessorTest2 = serviceAccessorTest2;
 
             //Ex1 get specific implemintation for IServMultipaleConcreate
-            _serviceAccessorTest("A").DoSomthing();
-            _serviceAccessorTest2.DoSomthing();
+            //_serviceAccessorTest("A").DoSomthing();
+            //_serviceAccessorTest2.DoSomthing();
 
             }
         

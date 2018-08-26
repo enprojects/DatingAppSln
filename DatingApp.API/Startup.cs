@@ -13,6 +13,7 @@ using DatingApp.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -64,12 +65,12 @@ namespace DatingApp.API
             services.AddScoped<ConcreateA>();
             services.AddScoped<ConcreateB>();
             services.AddTransient<Func<string, IServMultipaleConcreate>>(provider =>
-            { 
+            {
                 return key =>
                 {
                     if (key == "A")
                     {
-                        return  provider.GetService<ConcreateA>();
+                        return provider.GetService<ConcreateA>();
                     }
                     return provider.GetService<ConcreateB>();
                 };
@@ -94,7 +95,9 @@ namespace DatingApp.API
                     option.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("AppSettings:Key").Value))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("AppSettings:Key").Value)),
+                         ValidateIssuer=false,
+                          ValidateAudience=false
                     };
                 });
 
@@ -114,7 +117,23 @@ namespace DatingApp.API
             app.UseCors(x => x.AllowAnyOrigin());
             app.UseAuthentication();
             app.UseMvc();
+            //    app.Use(async (context, next) =>
+            //    {
 
+            //        await context.Response.WriteAsync("test");
+
+            //        await next.Invoke();
+            //    });
+
+
+            //    app.Use(async (context, next) =>
+            //    {
+
+            //        await context.Response.WriteAsync("test 2");
+
+            //        return;
+            //    });
+            //}
         }
     }
 

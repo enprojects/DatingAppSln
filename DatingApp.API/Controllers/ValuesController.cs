@@ -29,20 +29,21 @@ namespace udemyCoreWithAngular.Controllers
         }
 
  
-        [AllowAnonymous]
+
+        [HttpGet("fetchValues")]
         public IEnumerable<Value> FetchValues()
         { 
             return _serv.GetAllValues();
         }
 
 
-      //  GET api/values/5
-        [AllowAnonymous]
-        [HttpGet("{id}")]
-        public string Get(string id)
-        {
-            return "valuedddd";
-        }
+      ////  GET api/values/5
+      //  [AllowAnonymous]
+      //  [HttpGet("{id}")]
+      //  public string Get(string id)
+      //  {
+      //      return "valuedddd";
+      //  }
 
         // POST api/values
         [HttpPost]

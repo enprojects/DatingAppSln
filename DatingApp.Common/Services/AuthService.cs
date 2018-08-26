@@ -18,11 +18,14 @@ namespace DatingApp.Common.Services
 
         private readonly IAuthRepository _repos;
 
-        public AuthService(IAuthRepository repos, IServMultipaleConcreate _serv)
+        //public AuthService(IAuthRepository repos, IServMultipaleConcreate _serv)
+        //{
+        //    _repos = repos;
+        //}
+        public AuthService(IAuthRepository repos)
         {
             _repos = repos;
         }
-
         public bool Login(string userName, string password)
         {
             var user = GetUser(userName);
@@ -31,7 +34,7 @@ namespace DatingApp.Common.Services
             {
                 return Decrypt(password) == password;
             }
-         
+
             return false;
         }
 
