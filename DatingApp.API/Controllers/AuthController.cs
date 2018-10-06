@@ -33,7 +33,7 @@ namespace DatingApp.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                var currentUser = _auth.CheckIfUserValid(user.Name, user.Password);
+                var currentUser = _auth.CheckIfUserValid(user.UserName, user.Password);
 
                 if (currentUser==null)
                     return StatusCode(StatusCodes.Status401Unauthorized, "wrong user or password");
@@ -80,12 +80,12 @@ namespace DatingApp.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                var currentUser = _auth.GetUser(user.Name);
+                var currentUser = _auth.GetUser(user.UserName);
 
                 if (currentUser != null)
                     return BadRequest("User already exist");
 
-                if (_auth.RegisterUser(user.Name, user.Password))
+                if (_auth.RegisterUser(user.UserName, user.Password))
                     return Ok();
 
                 return StatusCode(201);

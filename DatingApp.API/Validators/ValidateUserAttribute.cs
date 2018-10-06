@@ -17,7 +17,7 @@ namespace DatingApp.API.Validators
             var user = ((UserRegistrationDto)validationContext.ObjectInstance);
 
 
-            if (string.IsNullOrEmpty(user.Name) || string.IsNullOrEmpty(user.Password))
+            if (string.IsNullOrEmpty(user.UserName) || string.IsNullOrEmpty(user.Password))
             {
                 return new ValidationResult(ErrorMessage);
             }

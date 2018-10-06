@@ -17,7 +17,7 @@ namespace udemyCoreWithAngular.Controllers
 
 
 
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
