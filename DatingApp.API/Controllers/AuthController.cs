@@ -31,6 +31,7 @@ namespace DatingApp.API.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody]UserRegistrationDto user)
         {
+           //  throw new Exception ("eee");
             if (ModelState.IsValid)
             {
                 var currentUser = _auth.CheckIfUserValid(user.UserName, user.Password);

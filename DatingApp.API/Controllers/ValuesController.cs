@@ -13,9 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace udemyCoreWithAngular.Controllers
 {
-    
-
-
+      
 
     //[Authorize]
     [Route("api/[controller]")]
